@@ -1,4 +1,4 @@
-name: Docker Build Python
+name: Build and Show Docker Image
 
 on:
   push:
@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t python-app .
+      - name: Build Docker Image
+        run: docker build -t my-app:latest .
 
-      - name: Run container
-        run: docker run -d -p 3000:3000 python-app
+      - name: Show Docker Images
+        run: docker images
