@@ -1,0 +1,26 @@
+name: Build and View Docker Image
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: |
+          docker build -t voting-system-local:latest .
+          # Image-a file-aa save panrom (.tar format)
+          docker save voting-system-local:latest > voting-image.tar
+
+      - name: Upload Docker Image as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-docker-image
+          path: voting-image.tar
